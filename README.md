@@ -3,7 +3,7 @@
 - 世界の主要国の平均賃金（年間給与平均）を比較
 
 ## ②工夫した点・こだわった点
-- Google Spread SheetのAPI
+- Google Spreadsheet API 
 - GoogleFinance関数を使うことで随時為替レートが更新される（FX MarketがOpenな時）
 - 日本の順位も随時更新（例　木曜日から急に円高になったので21位→20位に上がった）
 
