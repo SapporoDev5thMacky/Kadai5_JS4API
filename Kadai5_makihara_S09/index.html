@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<header>
+  <h1>平均賃金ランキング</h1>
+</header>
+
+  <h2>日本の順位は<span id=japan>#</span>位/OECD加盟35か国</h2>
+<div class="up">
+<button id="update">更新する</button>
+</div>
+ 
+      <table id="table">          
+        <thead>
+        <th width="10%">順位</th>
+        <th width="30%">国</th>
+        <th width="30%">年平均賃金</th>
+        <th width="15%">通貨</th>
+        <th width="15%">換算レート</th>
+        </tr>
+      </thead>  		
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+      const request = new XMLHttpRequest();
+      let data = "";
+      let rank ="";
+      let kuni ="";
+      let chingin ="";
+      let tsuuka = "";
+      let rate = "";
+
+    //  API KEYはGoogle FORM
+   request.open('GET', 'APIKEY');
+   request.responseType = 'json';
+   request.onload = function () {
+        data = this.response;
+        console.log(data["data"][0]);
+ 
+        for(let i=2; i<data['data'].length; i++){
+            rank = data['data'][i][0];
+            kuni = data['data'][i][1];
+            chingin = data['data'][i][2];
+            tsuuka = data['data'][i][3];
+            rate = data['data'][i][4];
+
+     const html = '<tr><th>'+rank+'</th><td>'+kuni+'</td><td>'+chingin+"万円"+'</td><td>'+tsuuka+'</td><td>'+rate+'</td></tr>';
+    $("#table").append(html);
+    $("#japan").text(data['data'][0][0]);
+  }
+   }
+
+//ページリロードをクリックイベントで発火させる
+$('#update').click(function() {
+  location.reload();
+});
+
+request.send();
+
+</script>
+  
+</body>
+</html>
